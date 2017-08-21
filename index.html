@@ -57,11 +57,11 @@
                 <h1 class="page-header">Recent Taps</h1>
 				<h3 class="page-subheader">Date: <span id="date">Loading...</span></h3>
 				<h3 class="page-subheader">Time: <span id="clock">Loading...</span></h3>
-                <form onsubmit="return submitRFID(this);">
+                <form id="rfidform">
                   <div class="form-group col-lg-4 col-md-6 col-sm-12 col-xs-12">
                     <div class="input-group">
                       <span class="input-group-addon">RFID</span>
-                      <input type="text" class="form-control" name="rfid" autofocus>
+                      <input type="text" class="form-control" id="rfid" autofocus>
                       <span class="input-group-btn">
                         <button class="btn btn-primary" type="submit">Enter</button>
                       </span>
@@ -97,6 +97,7 @@
     <!--/.container-->
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/custom.js"></script>
 	<script type="text/javascript" src="js/moment.js"></script>
@@ -144,15 +145,13 @@
 	</script>
 	
 	<script type="text/javascript">
-		function submitRFID(form){
-			var rfid;
-			rfid = form.rfid.value;
-
-			if(rfid){
-				form.rfid.value = "";
-			}
+		var socket = io.connect('http://localhost:3000');
+		$('#rfidform').submit(function(event){
+			var formdata = $('#rfidform').serialize();
+			socket.emit('rfid', {data: formdata});
+			$('#rfid').val('');
 			return false;
-		}
+		});
 	</script>
 </body>
 
