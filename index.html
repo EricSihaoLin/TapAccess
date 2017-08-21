@@ -55,10 +55,11 @@
                     <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"><i class="glyphicon glyphicon-chevron-left"></i></button>
                 </p>
                 <h1 class="page-header">Recent Taps</h1>
+				<h3 class="page-subheader">Current Time: <span id="clock" class="clock">Loading...</span></h3>
                 <form>
-                  <div class="form-group col-md-3">
+                  <div class="form-group col-lg-4 col-md-8 col-sm-8 col-xs-8">
                     <div class="input-group">
-                      <span class="input-group-addon">Client RFID</span>
+                      <span class="input-group-addon">RFID</span>
                       <input type="text" class="form-control" autofocus>
                       <span class="input-group-btn">
                         <button class="btn btn-default" type="button">Enter</button>
@@ -66,8 +67,10 @@
                     </div>
                   </div>
                 </form>
-                <a href="#" class="btn btn-default">Add Test Row</a>
-                <div class="table-responsive col-md-12">
+				<div class="col-lg-2 col-md-4 col-sm-4 col-xs-4">
+					<button class="btn btn-default" type="button" id="add">Add</button>
+				</div>
+                <div class="table-responsive col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <table class="table">
                         <thead>
                             <tr>
@@ -80,7 +83,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>1,001</td>
+                                <td>1001</td>
                                 <td>Lorem</td>
                                 <td>ipsum</td>
                                 <td>dolor</td>
@@ -98,6 +101,7 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/custom.js"></script>
+	<script type="text/javascript" src="js/moment.js"></script>
     <script type="text/javascript">
       $(document).ready(function() {
         $('[data-toggle=offcanvas]').click(function() {
@@ -105,6 +109,22 @@
         });
       });
     </script>
+	
+	<script type="text/javascript">
+		function update() {
+		  $('#clock').html(moment().format('MMM Do YY, h:mm:ss a'));
+		}
+		setInterval(update, 1000);
+	</script>
+	
+	<script type="text/javascript">
+		$('#add').click(function() {
+			$('<tr><td>Timestamp</td><td>Accepted</td><td>Eric Lin</td><td>sl5268</td><td></td></tr>')
+				.hide()
+				.prependTo('table tbody')
+				.fadeIn("slow")
+		});
+	</script>
 </body>
 
 </html>
