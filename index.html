@@ -55,21 +55,26 @@
                     <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"><i class="glyphicon glyphicon-chevron-left"></i></button>
                 </p>
                 <h1 class="page-header">Recent Taps</h1>
-				<h3 class="page-subheader">Current Time: <span id="clock" class="clock">Loading...</span></h3>
-                <form>
-                  <div class="form-group col-lg-4 col-md-8 col-sm-8 col-xs-8">
+				<h3 class="page-subheader">Date: <span id="date">Loading...</span></h3>
+				<h3 class="page-subheader">Time: <span id="clock">Loading...</span></h3>
+                <form onsubmit="return submitRFID(this);">
+                  <div class="form-group col-lg-4 col-md-6 col-sm-12 col-xs-12">
                     <div class="input-group">
                       <span class="input-group-addon">RFID</span>
-                      <input type="text" class="form-control" autofocus>
+                      <input type="text" class="form-control" name="rfid" autofocus>
                       <span class="input-group-btn">
-                        <button class="btn btn-default" type="button">Enter</button>
+                        <button class="btn btn-primary" type="submit">Enter</button>
                       </span>
                     </div>
                   </div>
                 </form>
-				<div class="col-lg-2 col-md-4 col-sm-4 col-xs-4">
-					<button class="btn btn-default" type="button" id="add">Add</button>
+				<div class="col-lg-2 col-md-3 col-sm-6 col-xs-6">
+					<button class="btn btn-success clearfix" type="button" id="addAccept">Accept</button>
 				</div>
+				<div class="col-lg-2 col-md-3 col-sm-6 col-xs-6">
+					<button class="btn btn-danger clearfix" type="button" id="addDeny">Deny</button>
+				</div>
+				<br>
                 <div class="table-responsive col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <table class="table">
                         <thead>
@@ -82,13 +87,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1001</td>
-                                <td>Lorem</td>
-                                <td>ipsum</td>
-                                <td>dolor</td>
-                                <td>sit</td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -112,18 +110,41 @@
 	
 	<script type="text/javascript">
 		function update() {
-		  $('#clock').html(moment().format('MMM Do YY, h:mm:ss a'));
+		  $('#date').html(moment().format('MMM Do YY'));
+		  $('#clock').html(moment().format('h:mm:ss a'));
 		}
 		setInterval(update, 1000);
 	</script>
 	
 	<script type="text/javascript">
-		$('#add').click(function() {
-			$('<tr><td>Timestamp</td><td>Accepted</td><td>Eric Lin</td><td>sl5268</td><td></td></tr>')
+		$('#addAccept').click(function() {
+			var now = moment().format('MMM Do YY h:mm:ss a');
+			$('<tr><td>' + now + '</td><td>Accepted</td><td>Eric Lin</td><td>sl5268</td><td></td></tr>')
 				.hide()
 				.prependTo('table tbody')
 				.fadeIn("slow")
+				.addClass("success")
 		});
+		$('#addDeny').click(function() {
+			var now = moment().format('MMM Do YY h:mm:ss a');
+			$('<tr><td>' + now + '</td><td>Denied</td><td>Sarth Desai</td><td>sd2461</td><td>Client is in admin position</td></tr>')
+				.hide()
+				.prependTo('table tbody')
+				.fadeIn("slow")
+				.addClass("danger")
+		});
+	</script>
+	
+	<script type="text/javascript">
+		function submitRFID(form){
+			var rfid;
+			rfid = form.rfid.value;
+
+			if(rfid){
+				form.rfid.value = "";
+			}
+			return false;
+		}
 	</script>
 </body>
 
