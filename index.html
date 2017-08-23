@@ -48,9 +48,7 @@
                     <li><a href="#">Help</a></li>
                 </ul>
             </div>
-            <!--/span-->
             <div class="col-sm-9 col-md-10 main">
-                <!--toggle sidebar button-->
                 <p class="visible-xs">
                     <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"><i class="glyphicon glyphicon-chevron-left"></i></button>
                 </p>
@@ -68,13 +66,6 @@
                     </div>
                   </div>
                 </form>
-				<div class="col-lg-2 col-md-3 col-sm-6 col-xs-6">
-					<button class="btn btn-success clearfix" type="button" id="addAccept">Test Accept</button>
-				</div>
-				<div class="col-lg-2 col-md-3 col-sm-6 col-xs-6">
-					<button class="btn btn-danger clearfix" type="button" id="addDeny">Test Deny</button>
-				</div>
-				<br>
                 <div class="table-responsive col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <table class="table">
                         <thead>
@@ -91,96 +82,17 @@
                     </table>
                 </div>
             </div>
-            <!--/row-->
         </div>
     </div>
-    <!--/.container-->
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/custom.js"></script>
 	<script type="text/javascript" src="js/moment.js"></script>
-    <script type="text/javascript">
-      $(document).ready(function() {
-        $('[data-toggle=offcanvas]').click(function() {
-          $('.row-offcanvas').toggleClass('active');
-        });
-      });
-    </script>
-	
-	<script type="text/javascript">
-		function update() {
-		  $('#date').html(moment().format('MMM Do YY'));
-		  $('#clock').html(moment().format('h:mm:ss a'));
-		}
-		setInterval(update, 1000);
-	</script>
-	
-	<script type="text/javascript">
-		$('#addAccept').click(function() {
-			var now = moment().format('MMM Do YY h:mm:ss a');
-			$('<tr><td>' + now + '</td><td>Accepted</td><td>Eric Lin</td><td>sl5268</td><td></td></tr>')
-				.hide()
-				.prependTo('table tbody')
-				.fadeIn("slow")
-				.addClass("success");
-			var table = document.getElementById("data");
-			if(table.childElementCount > 15){
-				table.removeChild(table.lastChild);
-			}
-		});
-		$('#addDeny').click(function() {
-			var now = moment().format('MMM Do YY h:mm:ss a');
-			$('<tr><td>' + now + '</td><td>Denied</td><td>Sarth Desai</td><td>sd2461</td><td>Client is in admin position</td></tr>')
-				.hide()
-				.prependTo('table tbody')
-				.fadeIn("slow")
-				.addClass("danger");
-			var table = document.getElementById("data");
-			if(table.childElementCount > 15){
-				table.removeChild(table.lastChild);
-			}
-		});
-	</script>
-	
-	<script type="text/javascript">
-		var socket = io.connect('http://localhost:3000');
-		socket.on('connect', function() {
-			console.log('Listening to socket');
-			socket.on('accept', function(data) {
-				var now = moment().format('MMM Do YY h:mm:ss a');
-				$('<tr><td>' + now + '</td><td>Accepted</td><td>' + data.name + '</td><td>' + data.netid + '</td><td>' + data.notes + '</td></tr>')
-					.hide()
-					.prependTo('table tbody')
-					.fadeIn("slow")
-					.addClass("success");
-				var table = document.getElementById("data");
-				if(table.childElementCount > 15){
-					table.removeChild(table.lastChild);
-				}
-			});
-			socket.on('deny', function(data) {
-				var now = moment().format('MMM Do YY h:mm:ss a');
-				$('<tr><td>' + now + '</td><td>Denied</td><td>' + data.name + '</td><td>' + data.netid + '</td><td>' + data.notes + '</td></tr>')
-					.hide()
-					.prependTo('table tbody')
-					.fadeIn("slow")
-					.addClass("danger");
-				var table = document.getElementById("data");
-				if(table.childElementCount > 15){
-					table.removeChild(table.lastChild);
-				}
-			});
-		});
+	<script type="text/javascript" src="js/rfid.js"></script>
+	<script type="text/javascript" src="js/tapaccess.js"></script>
 		
-		$('#rfidform').submit(function(event){
-			var formdata = $('#rfid').val();
-			socket.emit('rfid', formdata);
-			$('#rfid').val('');
-			return false;
-		});
-	</script>
 </body>
 
 </html>
