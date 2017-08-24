@@ -29,15 +29,14 @@
                 </button>
                 -->
                 <a class="navbar-brand" href="#">STC Tap</a>
+                
             </div>
-            <!--
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="index.html">Recent Taps</a></li>
+					<li><span id="connstatus" class="connWaiting">Connecting...</span></li>
                     <li><a href="#">Help</a></li>
                 </ul>
             </div>
-            -->
         </div>
     </nav>
     <div class="container-fluid">
@@ -46,7 +45,6 @@
                 <ul class="nav nav-sidebar">
                     <li class="active"><a href="#">Recent Taps</a></li>
                     <li><a href="#">Metrics</a></li>
-                    <li><a href="#">Help</a></li>
                 </ul>
             </div>
             <div class="col-sm-9 col-md-10 main">
@@ -62,7 +60,7 @@
                       <span class="input-group-addon">RFID</span>
                       <input type="text" class="form-control" id="rfid" autocomplete="off" autofocus>
                       <span class="input-group-btn">
-                        <button class="btn btn-primary" type="submit">Enter</button>
+                        <button id="rfidsubmit" class="btn btn-primary" type="submit">Enter</button>
                       </span>
                     </div>
                   </div>
@@ -72,10 +70,10 @@
                         <thead>
                             <tr>
                                 <th class="col-md-2">Timestamp</th>
-                                <th class="col-md-1">Status</th>
                                 <th class="col-md-2">Name</th>
                                 <th class="col-md-2">NetID</th>
-                                <th class="col-md-5">Notes</th>
+                                <th class="col-md-2">Station</th>
+                                <th class="col-md-4">Notes</th>
                             </tr>
                         </thead>
                         <tbody id="data">

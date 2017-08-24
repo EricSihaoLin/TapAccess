@@ -292,3 +292,39 @@ footer p {
 .main .page-header {
   margin-top: 0;
 }
+
+/*
+ * Connection Status
+ */
+.connFailed {
+  background-color: #b94a48;
+  color: #fff;
+  float: left;
+  padding: 15px 15px;
+  font-size: 18px;
+  line-height: 20px;
+  height: 50px;
+  font-weight: bold;
+}
+
+.connWaiting {
+  background-color: #c09853;
+  color: #fff;
+  float: left;
+  padding: 15px 15px;
+  font-size: 18px;
+  line-height: 20px;
+  height: 50px;
+  font-weight: bold;
+}
+
+.connSuccess {
+  background-color: #468847;
+  color: #fff;
+  float: left;
+  padding: 15px 15px;
+  font-size: 18px;
+  line-height: 20px;
+  height: 50px;
+  font-weight: bold;
+}
